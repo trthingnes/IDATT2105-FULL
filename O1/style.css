@@ -1,0 +1,101 @@
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: whitesmoke;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-rows: min-content auto min-content;
+    grid-template-areas:
+    "header header header header header"
+    "nav main main main main"
+    "footer footer footer footer footer";
+}
+
+header {
+    grid-area: header;
+    background-color: lightsteelblue;
+    padding: 10px;
+}
+
+header h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: absolute;
+    top: 0.25rem;
+    left: 90px;
+}
+
+header .logo {
+    height: 64px;
+    width: 64px;
+    background-image: url("img/logo.png");
+    background-size: contain;
+    display: block;
+}
+
+nav {
+    grid-area: nav;
+    font-family:'Times New Roman', Times, serif;
+    min-width: 180px;
+    padding: 5px 20px;
+}
+
+main {
+    grid-area: main;
+    padding: 20px;
+}
+
+section {
+    padding: 20px;
+    grid-auto-flow: column;
+    min-width: 500px;
+    max-width: 45%;
+    display: inline-flex;
+}
+
+section p {
+    margin: 0;
+}
+
+section img {
+    height: 200px;
+    padding-right: 10px;
+}
+
+footer {
+    grid-area: footer;
+    text-align: center;
+    padding: 10px;
+    background-color: steelblue;
+    color: white;
+}
+
+button {
+    position: absolute;
+    margin-left: 5px;
+    background-color: whitesmoke;
+    border: 2px solid black;
+    border-bottom-width: 6px;
+    border-right-width: 4px;
+    padding: 2px 5px;
+    transition: all .1s;
+}
+
+button:hover {
+    border-bottom-width: 4px;
+    border-right-width: 3px;
+    margin-top: 2px;
+    margin-left: 6px;
+}
+
+button:active {
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+    margin-top: 4px;
+    margin-left: 7px;
+}
