@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <article id="calculator">
+            <h1 class="number-display">{{ currNumber }}</h1>
+            <section id="operator-group" class="button-group">
+                <calculator-button :value="'CA'" @press="press"></calculator-button>
+                <calculator-button :value="'C'" @press="press"></calculator-button>
+                <calculator-button :value="'+'" @press="press"></calculator-button>
+                <calculator-button :value="'−'" @press="press"></calculator-button>
+                <calculator-button :value="'×'" @press="press"></calculator-button>
+                <calculator-button :value="'÷'" @press="press"></calculator-button>
+                <calculator-button :value="'='" @press="press"></calculator-button>
+            </section>
+            <section id="number-group" class="button-group">
+                <calculator-button :value="'1'" @press="press"></calculator-button>
+                <calculator-button :value="'2'" @press="press"></calculator-button>
+                <calculator-button :value="'3'" @press="press"></calculator-button>
+                <calculator-button :value="'4'" @press="press"></calculator-button>
+                <calculator-button :value="'5'" @press="press"></calculator-button>
+                <calculator-button :value="'6'" @press="press"></calculator-button>
+                <calculator-button :value="'7'" @press="press"></calculator-button>
+                <calculator-button :value="'8'" @press="press"></calculator-button>
+                <calculator-button :value="'9'" @press="press"></calculator-button>
+                <calculator-button :value="'0'" @press="press"></calculator-button>
+                <calculator-button :value="'.'" @press="press"></calculator-button>
+                <calculator-button :value="'←'" @press="press"></calculator-button>
+            </section>
+            <section id="log">
+                <h5 v-for="entry in log">{{ entry }}</h5>
+            </section>
+        </article>
+    </div>
+</body>
+<script src="main.js"></script>
+<script src="components/CalculatorButton.js"></script>
+<script>
+    const ma = app.mount("#app")
+</script>
+</html>
