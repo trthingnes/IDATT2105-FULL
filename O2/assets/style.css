@@ -4,6 +4,7 @@
     --calculator-color: #ccc;
     --display-color: #777;
     --button-color: whitesmoke;
+    --button-hover-color: #dde;
 }
 
 * {
@@ -49,10 +50,16 @@
     height: var(--button-size);
     width: var(--button-size);
     font-size: 1em;
+    transition: 0.2s ease-in-out
+}
+
+.calculator-button:hover {
+    background-color: var(--button-hover-color);
 }
 
 #log {
     overflow-x: scroll;
+    white-space: nowrap;
     padding: 15px 5px;
     margin: 0 15px;
 }

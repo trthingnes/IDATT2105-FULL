@@ -57,6 +57,11 @@ const app = Vue.createApp({
             }
         },
         calculate() {
+            if(isNaN(this.prevNumber) || isNaN(this.currNumber)) {
+                this.currNumber = "Invalid"
+                return
+            }
+
             switch(this.operator) {
                 case "+": {
                     let result = parseFloat(this.prevNumber) + parseFloat(this.currNumber)
