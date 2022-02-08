@@ -1,5 +1,4 @@
 <template>
-  <h1>Calculator</h1>
   <Calculator />
 </template>
 

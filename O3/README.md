@@ -1,4 +1,4 @@
-# o3
+# full-o3
 
 ## Project setup
 ```
