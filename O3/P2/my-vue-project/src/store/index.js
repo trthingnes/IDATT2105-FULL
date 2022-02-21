@@ -1,12 +1,15 @@
 import { createStore } from 'vuex'
 
-export default createStore({
+export const options = {
   state: {
-    username: null,
+    username: "",
   },
   mutations: {
     SET_USER(state, username) {
       state.username = username
+    },
+    RESET(state) {
+      state.username = ""
     }
   },
   actions: {
@@ -21,4 +24,6 @@ export default createStore({
   },
   modules: {
   }
-})
+}
+
+export default createStore(options)
