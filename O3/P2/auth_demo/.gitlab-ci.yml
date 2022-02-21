@@ -1,0 +1,42 @@
+image: docker:19.03.1
+services:
+  - name: docker:19.03.1-dind
+    alias: docker
+    command: ["--tls=false"]
+
+variables:
+  CONTAINER_IMAGE: "$CI_REGISTRY_IMAGE:latest"
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  variables:
+    #DOCKER_HOST: tcp://docker:2375
+    #DOCKER_DRIVER: overlay2
+    #CONTAINER_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA
+    DOCKER_TLS_CERTDIR: ""
+  before_script:
+    - echo -n $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build
+      --pull
+      --cache-from $CI_REGISTRY_IMAGE:latest
+      --tag $CONTAINER_IMAGE .
+    - docker push $CONTAINER_IMAGE
+  when: manual
+
+deploy:
+  image: alpine/k8s:1.20.7
+  stage: deploy
+  allow_failure: true
+  script:
+    - echo "$KUBECONFIG_STACKIT" > /tmp/stackit.json
+    - export KUBECONFIG=$KUBECONFIG:"/tmp/stackit.json"
+    #- kubectl cluster-info
+    - echo "Image to be deployed $CONTAINER_IMAGE"
+    - kubectl apply -f k8s/deploy.yml -n default
+  when: manual
