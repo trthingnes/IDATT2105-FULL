@@ -1,16 +1,16 @@
-import axios from "axios";
+import axios from "axios"
 
 export function calculate(firstNumber, secondNumber, operator) {
   return axios
     .post("http://localhost:8888/calculate", {
-      firstNumber: firstNumber,
-      secondNumber: secondNumber,
-      operator: operator,
+      first: firstNumber,
+      second: secondNumber,
+      operator: ["+", "−", "×", "÷"].indexOf(operator),
     })
     .then((result) => {
-      return result.data["result"];
+      return result.data["result"]
     })
     .catch((reason) => {
-      console.warn(reason);
-    });
+      console.warn(reason)
+    })
 }
