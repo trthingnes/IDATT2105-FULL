@@ -7,10 +7,7 @@ import edu.ntnu.tobiasth.backend.util.TokenParser
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpServletRequest
 import kotlin.IllegalStateException
 
@@ -23,7 +20,7 @@ class CalculateController {
     @Autowired
     private lateinit var equationRepository: EquationRepository
 
-    @PostMapping("/calculate")
+    @PostMapping("/calculation")
     fun calculate(@RequestBody equation: Equation, request: HttpServletRequest): ResponseEntity<Any> {
         return try {
             try {
@@ -42,6 +39,25 @@ class CalculateController {
                 }
             } catch (e: NumberFormatException) {
                 throw IllegalStateException("Invalid number")
+            }
+        }
+        catch (e: Exception) {
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mapOf(Pair("error", e.message)))
+        }
+    }
+
+    @GetMapping("/calculation")
+    fun getAllCalculations(request: HttpServletRequest): ResponseEntity<Any> {
+        return try {
+            val optional = userRepository.findByUsername(TokenParser(request).username)
+            if (optional.isPresent) {
+
+                val user = optional.get()
+
+                ResponseEntity.status(HttpStatus.OK).body(user.equations.reversed())
+            }
+            else {
+                throw IllegalStateException("User does not exist")
             }
         }
         catch (e: Exception) {

@@ -1,23 +1,28 @@
 <template>
-  <Calculator />
+    <Calculator />
 </template>
 
 <script>
-import Calculator from "@/components/Calculator";
+import Calculator from "@/components/Calculator"
 
 export default {
-  components: {
-    Calculator,
-  },
-};
+    beforeMount() {
+        if (!this.$store.state.token) {
+            this.$router.push({ name: "login" })
+        }
+    },
+    components: {
+        Calculator,
+    },
+}
 </script>
 
 <style scoped>
 body {
-  background-color: whitesmoke;
+    background-color: whitesmoke;
 }
 
 h1 {
-  text-align: center;
+    text-align: center;
 }
 </style>
